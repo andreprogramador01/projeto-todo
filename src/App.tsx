@@ -1,44 +1,44 @@
 import { useState } from 'react'
-import { AddArea } from './components/AddArea';
-import {ListItem} from './components/ListItem'
+import {ListItem } from './components/ListItem'
+import {AddArea} from './components/AddArea'
 
 type Item = {
-  id: number;
+  id:number;
   name: string;
   done: boolean;
 }
 
 
 function App() {
-  const [list, setList] = useState<Item[]> ([
-    {
-    id: 1, name: 'comprar pão na padaria', done: false
-  }, {
-    id: 2, name: 'comprar feijão', done: false
+  const [list, setList] = useState<Item[]>([{
+    id:1, name: "comprar pão", done:false
+  },
+  {
+    id:2, name: "comprar mortadela", done:false
   }
-]);
-
-
-const handleTaskValue = (taskValue: string) =>{
-  
+])
+function handleTaskValue(taskValue: string){
   let newList = [...list];
   newList.push({
     id: list.length + 1,
     name: taskValue,
     done: false
   });
-  
   setList(newList);
+
+}
+function removeTaskValue(taskId: number){
+  let newList = [...list];
+  let renewList = newList.filter((item)=> item.id !== taskId);
+  setList(renewList);
 }
   return (
     <div className="App">
-      <AddArea onhandleTaskValue={handleTaskValue} />
-      {list.map((item, index) =>{
-        return <ListItem item={item}/>
-      })}
-      
-      
-    </div>
+      <AddArea  onHandleTaskValue={handleTaskValue}/>
+      {list.map((item, index)=>(
+        <ListItem onRemoveTaskValue={removeTaskValue} key={index} item={item} />
+      ))}
+      </div>
   )
 }
 

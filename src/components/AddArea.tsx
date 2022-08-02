@@ -1,19 +1,17 @@
-import {useState} from 'react';
+import { useState } from "react"
 
-
-type Props ={
-    onhandleTaskValue : (taskValue:string) => void;
+type Props = {
+    onHandleTaskValue : (taskValue: string) => void;
 }
-export function AddArea({onhandleTaskValue}: Props){
+export function AddArea({onHandleTaskValue}:Props){
     const [inputText, setInputText] = useState('');
 
-    const Inserir = () =>{
-        onhandleTaskValue(inputText);
-        setInputText('');
+    function Inserir(){
+        onHandleTaskValue(inputText);
     }
     return(
         <div>
-            <input type="text" value={inputText} onChange={(e)=>setInputText(e.target.value)} name="" id="input" />
+            <input type="text" placeholder="digite a tarefa" value={inputText} onChange={(e)=>setInputText(e.target.value)} />
             <button onClick={Inserir}>inserir</button>
         </div>
     )
